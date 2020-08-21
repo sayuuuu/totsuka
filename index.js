@@ -291,11 +291,20 @@ async function msgHandler (client, message) {
           if (args.length == 3) {
               const season = args[1]
               const year = args[2]
-              malScraper.getSeason(year, season)
-                .then((data) => console.log(data))
-                .catch((err) => console.log(err))
+              data = malScraper.getSeason(year, season)
+              pesan = ""
+              i = 1
+              if (data!=null) {
+                data.forEach(function(data) {
+                  pesan = pesan + i + ". " + data.title + "\n"
+                  i++
+                  //await client.sendText(from,'⛩️Title:' + data.title + '\n🎼️Score:' + `${score}` + '\n📙️Status:' + `${status}` + '\n🖼️Episodes:' + `${episodes}` + '\n✨️Rating:' + `${rating}` + '\n📆️Aired:' + `${aired}` + '.' + `\nGenres:' + ${genres}\n\n`)
+                client.sendText(from,pesan)
+                })
+              }
+              //{ title, score, episodes, aired, rating, status, genres } = malScraper.getSeason(year, season)) {
           } else {
-            console.log("Contoh penulisan: #musim summer 2020")
+            client.sendText(from, "Contoh penulisan: #musim summer 2020")
           }
           //client.sendText(from, 'Summer 2020 \n Re:Zero kara Hajimeru Isekai Seikatsu 2nd Season \n Yahari Ore no Seishun Love Comedy wa Machigatteiru. Kan \n The God of High School \n Sword Art Online: Alicization - War of Underworld 2nd Season \n Enen no Shouboutai: Ni no Shou \n Maou Gakuin no Futekigousha: Shijou Saikyou no Maou no Shiso, Tensei shite Shison-tachi no Gakkou e \n Kanojo, Okarishimasu \n Deca-Dence \n Uzaki-chan wa Asobitai! \n Monster Musume no Oishasan')
           break
