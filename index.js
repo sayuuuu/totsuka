@@ -67,11 +67,11 @@ async function msgHandler (client, message) {
       switch (cmd[0].toLowerCase()) {
         case '#menu':
         case '#help':
-          client.sendText(from, `👋️Yahallo *${pushname}*, Aku Yui-chan:)\n\n*Aku harus ngapain nich??*✨\n\n*_#stiker_*\n*Buat ngubah gambar ke stiker*\n\n*_#anime <judul anime>_*\n*Menampilkan deskripsi anime*\n\n*_#koin_*\n*Buat lempar koin*\n\n*_#dadu_*\n*Buat lempar dadu*\n\n*_#neko_*\n*Yo yang mau kucheng*\n\n*_#meme_*\n*Random meme dari r\/wholesomeanimememes*\n\n*_#waifu_*\n*Fitur ini lagi dinonaktifin sama papa:(*\n\n*_#covid <nama negara>_*\n*Info statistik langsung dari negara yang diminta*\n\n*_#quotes_*\n*Untuk sementara, quotesnya bahasa inggris ya:(*\n\n*_#pokemon_*\n*Ngasih gambar pokemon secara manasuka (random)*\n\n*_#wallpaper [Beta]_*\n*Fitur ini lagi dinonaktifin sama papa:(*\n\n*_#Top anime musim ini_* [Beta]\n*List anime musim ini*\n\n*_#info_*\n*Buat kenalan siapa sih Yui-chan?*\n\nBanyak kata kunci tersembunyi, btw ;)\n\n`)
+          client.sendText(from, `👋️Yahallo *${pushname}*, Aku Yui-chan:)\n\n*Aku harus ngapain nich??*✨\n\n*_#stiker_*\n*Buat ngubah gambar ke stiker*\n\n*_#anime <judul anime>_*\n*Menampilkan deskripsi anime*\n\n*_#koin_*\n*Buat lempar koin*\n\n*_#dadu_*\n*Buat lempar dadu*\n\n*_#neko_*\n*Yo yang mau kucheng*\n\n*_#meme_*\n*Random meme dari r\/wholesomeanimememes*\n\n*_#waifu_*\n*_#covid <nama negara>_*\n*Info statistik langsung dari negara yang diminta*\n\n*_#quotes_*\n*Untuk sementara, quotesnya bahasa inggris ya:(*\n\n*_#pokemon_*\n*Ngasih gambar pokemon secara manasuka (random)*\n\n*_#musim <season> <tahun> <tipe(optional)>_*\n*Menampilkam list anime dari musim yang diminta. Terus tipe itu optional sih bisa ditambahin kata tv, ova, ona, movie, dan special. Contohnya: #musim winter 2019 ova. Bisa juga tanpa tipe misal #musim winter 2019*\n\n*_#info_*\n*Buat kenalan siapa sih Yui-chan?*\n\nBanyak kata kunci tersembunyi, btw ;)\n\n`)
           break
         case '#hello':
           await client.simulateTyping(from, true)
-          client.sendText(from, 'Hello there, How can I help?')
+          client.sendText(from, `👋️Yahallo *${pushname}-senpai*, ada yang bisa dibantu?`)
           await client.simulateTyping(from, false)
           break
         case '#grouplink':
@@ -288,24 +288,83 @@ async function msgHandler (client, message) {
           client.sendStickerfromUrl(from, 'https://ih1.redbubble.net/image.930182194.9969/st,small,507x507-pad,600x600,f8f8f8.jpg', { method: 'get' })
           break
         case '#musim':
-          if (args.length == 3) {
+          if (args.length > 3) {
+            jenisnya = args[3]
+            jenis = jenisnya.toLowerCase()
+          } else {
+            jenis = ""
+          }
+          if (args.length >= 3) {
               const season = args[1]
               const year = args[2]
-              data = malScraper.getSeason(year, season)
               pesan = ""
-              i = 1
-              if (data!=null) {
-                data.forEach(function(data) {
-                  pesan = pesan + i + ". " + data.title + "\n"
-                  i++
-                  //await client.sendText(from,'⛩️Title:' + data.title + '\n🎼️Score:' + `${score}` + '\n📙️Status:' + `${status}` + '\n🖼️Episodes:' + `${episodes}` + '\n✨️Rating:' + `${rating}` + '\n📆️Aired:' + `${aired}` + '.' + `\nGenres:' + ${genres}\n\n`)
-                client.sendText(from,pesan)
-                })
+              i = 0
+              const { TV, TVNew, TVCon, OVAs, ONAs, Movies, Specials } = await malScraper.getSeason(year, season)
+              if (jenis == "tv" || jenis == "") {
+                if (Array.isArray(TV)) {
+                      for(let tipe of TV) {
+                          i++
+                          pesan = pesan +"_"+ tipe.title +"_" + "\n" + "Tanggal rilis :" + tipe.releaseDate + "\n" + "Genre :" + tipe.genres + "\n" + "Score :" + tipe.score
+                          if(i>9) {
+                            break;
+                          } else {
+                            pesan = pesan + "\n\n"
+                          }
+                      }
+                  }
+              } else if(jenis == "ova" || jenis == "ovas") {
+                if (Array.isArray(OVAs)) {
+                      for(let tipe of OVAs) {
+                          i++
+                          pesan = pesan +"_"+ tipe.title +"_" + "\n" + "Tanggal rilis :" + tipe.releaseDate + "\n" + "Genre :" + tipe.genres + "\n" + "Score :" + tipe.score
+                          if(i>9) {
+                            break;
+                          } else {
+                            pesan = pesan + "\n\n"
+                          }
+                      }
+                  }
+              } else if(jenis == "ona" || jenis == "onas") {
+                if (Array.isArray(ONAs)) {
+                      for(let tipe of ONAs) {
+                          i++
+                          pesan = pesan +"_"+ tipe.title +"_" + "\n" + "Tanggal rilis :" + tipe.releaseDate + "\n" + "Genre :" + tipe.genres + "\n" + "Score :" + tipe.score
+                          if(i>9) {
+                            break;
+                          } else {
+                            pesan = pesan + "\n\n"
+                          }
+                      }
+                  }
+              } else if(jenis == "movies" || jenis == "movie") {
+                if (Array.isArray(Movies)) {
+                      for(let tipe of Movies) {
+                          i++
+                          pesan = pesan +"_"+ tipe.title +"_" + "\n" + "Tanggal rilis :" + tipe.releaseDate + "\n" + "Genre :" + tipe.genres + "\n" + "Score :" + tipe.score
+                          if(i>9) {
+                            break;
+                          } else {
+                            pesan = pesan + "\n\n"
+                          }
+                      }
+                  }
+              } else if(jenis == "special" || jenis == "specials") {
+                if (Array.isArray(Specials)) {
+                      for(let tipe of Specials) {
+                          i++
+                          pesan = pesan +"_"+ tipe.title +"_" + "\n" + "Tanggal rilis :" + tipe.releaseDate + "\n" + "Genre :" + tipe.genres + "\n" + "Score :" + tipe.score
+                          if(i>9) {
+                            break;
+                          } else {
+                            pesan = pesan + "\n\n"
+                          }
+                      }
+                  }
               }
+              client.sendText(from, pesan)
+              //client.sendText(from, "Data tidak ditemukan")
+            }
               //{ title, score, episodes, aired, rating, status, genres } = malScraper.getSeason(year, season)) {
-          } else {
-            client.sendText(from, "Contoh penulisan: #musim summer 2020")
-          }
           //client.sendText(from, 'Summer 2020 \n Re:Zero kara Hajimeru Isekai Seikatsu 2nd Season \n Yahari Ore no Seishun Love Comedy wa Machigatteiru. Kan \n The God of High School \n Sword Art Online: Alicization - War of Underworld 2nd Season \n Enen no Shouboutai: Ni no Shou \n Maou Gakuin no Futekigousha: Shijou Saikyou no Maou no Shiso, Tensei shite Shison-tachi no Gakkou e \n Kanojo, Okarishimasu \n Deca-Dence \n Uzaki-chan wa Asobitai! \n Monster Musume no Oishasan')
           break
         case '#thank you':
