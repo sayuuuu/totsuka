@@ -1,21 +1,17 @@
-# Whatsapp-Botto-Re
-Hello fellow users, Whatsapp Botto: Re is whatsapp automation script or more like a bot that responds to particular keywords and few other features that we are working on.
-
-This is an open-source program written in Javascript. 
-This project require NodeJS v12.
+# TotsukaBot
+TotsukaBot is a chatbot for whatsapp which send response to particular keywords. This project is originally developing by SomnathDas at https://github.com/SomnathDas/Whatsapp-Botto-Re.git . I just change and add some feature, translate to Bahasa Indonesia also. This is an open-source program written in Javascript. This project require NodeJS v12.
 
 ## :star2:  Features [Added & Working Flawlessly] :star2: 
+I had deleted some feature from original resource at https://github.com/SomnathDas/Whatsapp-Botto-Re.git , but i have to keep and add some feature also:
 1) Can turn images into stickers.
 2) Can return random Cat pictures.
-3) Can return a random quote.
-4) Can return a random image of waifu :heart_eyes: 
+3) Can return a random quote. 
 4) Can return random pokemon images.
-5) Can return random anime wallpapers.
-6) Can return a list of seasonal anime.
-7) Can return information about anime.
-8) Can return COVID-INFO for any country.
-9) Can return subreddit posts.
-10) Can return memes.
+5) Can return a list of seasonal anime.
+6) Can return information about anime.
+7) Can return COVID-INFO for any country.
+8) Can return memes.
+```
 
 ### :wink:  Also there are some hidden commands and keywords.
 
@@ -25,8 +21,7 @@ Thanks, Have a great day!  :smile:
 ## Clone this project
 
 ```bash
-> git clone https://github.com/SomnathDas/Whatsapp-Botto-Re.git
-```
+> git clone https://github.com/khavitidala/totsuka.git
 
 ## Install the dependencies:
 Before running the below command, make sure you're in the project directory that
@@ -63,3 +58,4 @@ https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md
 For Basic Implementation:
 1. Open-Wa : https://github.com/open-wa/wa-automate-nodejs.git
 2. imageToSticker : https://github.com/YogaSakti/imageToSticker
+3. Original developer : https://github.com/SomnathDas/Whatsapp-Botto-Re.git
