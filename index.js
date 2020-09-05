@@ -56,7 +56,7 @@ async function msgHandler (client, message) {
     const { pushname } = sender
     const { formattedTitle } = chat
     const time = moment(t * 1000).format('DD/MM HH:mm:ss')
-    const commands = ['#genre','#menu', '#help', '#sticker', '#quotes', '#stiker', '#hello', '#info', '#commands', '#god', 'thank you', 'i love you', '#musim', '#anime', '#anime', '#do you love me', '#tsundere', 'ara ara', 'yo', 'freedom', 'i love rem', 'I Love Rem', 'el Psy Congroo', 'tuturu', 'indeed','#neko', '#wallpaper', '#source', 'bikin kopi', '#pokemon', '#pokewall', '#wiki', '#emilia', '#rem', '#rem', '#tiktok', '#ig', '#instagram', '#twt', '#twitter', '#fb', '#facebook', '#groupinfo', '#meme', '#covid', '#sr', '#test', '#manga', '#user', '#TestGif', '#kick', '#leave', '#add', '#Faq', '#profile', '#koin', '#dadu', '#animeneko','chat.whatsapp.com']
+    const commands = ['#kodegenre', '#genre','#menu', '#help', '#sticker', '#quotes', '#stiker', '#hello', '#info', '#commands', '#god', 'thank you', 'i love you', '#musim', '#anime', '#anime', '#do you love me', '#tsundere', 'ara ara', 'yo', 'freedom', 'i love rem', 'I Love Rem', 'el Psy Congroo', 'tuturu', 'indeed','#neko', '#wallpaper', '#source', 'bikin kopi', '#pokemon', '#pokewall', '#wiki', '#emilia', '#rem', '#rem', '#tiktok', '#ig', '#instagram', '#twt', '#twitter', '#fb', '#facebook', '#groupinfo', '#meme', '#covid', '#sr', '#test', '#manga', '#user', '#TestGif', '#kick', '#leave', '#add', '#Faq', '#profile', '#koin', '#dadu', '#animeneko','chat.whatsapp.com']
     const cmds = commands.map(x => x + '\\b').join('|')
     const cmd = type === 'chat' ? body.match(new RegExp(cmds, 'gi')) : type === 'image' && caption ? caption.match(new RegExp(cmds, 'gi')) : ''
 
@@ -68,7 +68,7 @@ async function msgHandler (client, message) {
       switch (cmd[0].toLowerCase()) {
         case '#menu':
         case '#help':
-          client.sendText(from, `👋️Yahallo *${pushname}*, Aku Yui-chan:)\n\n*Aku harus ngapain nich??*✨\n\n*_#stiker_*\n*Buat ngubah gambar ke stiker*\n\n*_#anime <judul anime>_*\n*Menampilkan deskripsi anime*\n\n*_#koin_*\n*Buat lempar koin*\n\n*_#dadu_*\n*Buat lempar dadu*\n\n*_#neko_*\n*Yo yang mau kucheng*\n\n*_#meme_*\n*Random meme dari r\/wholesomeanimememes*\n\n*_#waifu_*\n*_#covid <nama negara>_*\n*Info statistik langsung dari negara yang diminta*\n\n*_#quotes_*\n*Untuk sementara, quotesnya bahasa inggris ya:(*\n\n*_#pokemon_*\n*Ngasih gambar pokemon secara manasuka (random)*\n\n*_#musim <season> <tahun> <tipe(optional)>_*\n*Menampilkam list anime dari musim yang diminta. Terus tipe itu optional sih bisa ditambahin kata tv, ova, ona, movie, dan special. Contohnya: #musim winter 2019 ova. Bisa juga tanpa tipe misal #musim winter 2019*\n\n*_#info_*\n*Buat kenalan siapa sih Yui-chan?*\n\nBanyak kata kunci tersembunyi, btw ;)\n\n`)
+          client.sendText(from, `👋️Yahallo *${pushname}*, Aku Yui-chan:)\n\n*Aku harus ngapain nich??*✨\n\n*_#stiker_*\n*Buat ngubah gambar ke stiker*\n\n*_#anime <judul anime>_*\n*Menampilkan deskripsi anime*\n\n*_#genre_*\n*Untuk menampilkan anime berdasarkan genre, contoh: #genre anime 2 1\nKata anime bisa diubah jadi manga, angka 2 merujuk pada kode genre, silakan ketik #kodegenre untuk tau kode setiap genre. Angka satu menunjukkan page/halaman, karena bisa jadi hasilnya banyak banget, so makanya dibikin page*\n\n*_#koin_*\n*Buat lempar koin*\n\n*_#dadu_*\n*Buat lempar dadu*\n\n*_#neko_*\n*Yo yang mau kucheng*\n\n*_#meme_*\n*Random meme dari r\/wholesomeanimememes*\n\n*_#waifu_*\n*_#covid <nama negara>_*\n*Info statistik langsung dari negara yang diminta*\n\n*_#quotes_*\n*Untuk sementara, quotesnya bahasa inggris ya:(*\n\n*_#pokemon_*\n*Ngasih gambar pokemon secara manasuka (random)*\n\n*_#musim <season> <tahun> <tipe(optional)>_*\n*Menampilkam list anime dari musim yang diminta. Terus tipe itu optional sih bisa ditambahin kata tv, ova, ona, movie, dan special. Contohnya: #musim winter 2019 ova. Bisa juga tanpa tipe misal #musim winter 2019*\n\n*_#info_*\n*Buat kenalan siapa sih Yui-chan?*\n\nBanyak kata kunci tersembunyi, btw ;)\n\n`)
           break
         case '#hello':
           await client.simulateTyping(from, true)
@@ -132,6 +132,10 @@ async function msgHandler (client, message) {
           break
         case '#testGif' :
           client.sendStickerfromUrl(from, 'https://media.tenor.com/images/62c4b269d97c2412c4f364945f62afae/tenor.gif', { method: 'get' })
+          break
+        case '#kodegenre':
+          pesan = "Action: 1\nAdventure: 2\nCars: 3\nComedy: 4\nDementia: 5	\nDemons: 6	\nMystery: 7	\nDrama: 8	\nEcchi: 9\nFantasy: 10	\nGame: 11	\nHistorical: 13	\nHorror: 14\nKids: 15	\nMagic: 16	\nMartial Arts: 17\nMecha: 18	\nMusic: 19	\nParody: 20	\nSamurai: 21	\nRomance: 22	\nSchool: 23	\nSci Fi: 24	\nShoujo: 25	\nShoujo Ai: 26	\nShounen: 27	\nShounen Ai: 28\nSpace: 29	\nSports: 30	\nSuper Power: 31\nVampire: 32\nYaoi: 33	\nYuri: 34\nHarem: 35\nSlice Of Life: 36\nSupernatural: 37\nMilitary: 38\nPolice: 39\nPsychological: 40\nThriller: 41\nSeinen: 42\nJosei: 43"
+          client.sendText(from, pesan)
           break
         case '#genre':
           if (args.length >= 4) {
