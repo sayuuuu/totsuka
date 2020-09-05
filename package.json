@@ -13,9 +13,8 @@
   "author": "Somnath Das and Alen Yohannan",
   "license": "Apache-2.0",
   "dependencies": {
-    "google-translate-api": "vitalets/google-translate-api#master",
     "jikan-node": "xy137/jikan-node#master",
-    "@open-wa/wa-automate": "^2.0.13",
+    "@open-wa/wa-automate": "^2.0.x",
     "akaneko": "^3.0.2",
     "anime-scraper": "^3.1.1",
     "fbvideos": "^1.0.2",

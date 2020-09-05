@@ -6,7 +6,6 @@ const Jikan = require('jikan-node')
 const mal = new Jikan()
 const axios = require('axios')
 const akaneko = require('akaneko')
-const translate = require('google-translate-api')
 
 var culture_code // IGNORE THESE LINES THESE LINES ARE ONLY FOR MY FELLO MEN OF CULTURE DEVs
 var quote_Array = ['“You know you’re in love when you can’t fall asleep because reality is finally better than your dreams.”– Dr. Suess', '“I’m selfish, impatient and a little insecure. I make mistakes, I am out of control and at times hard to handle. But if you can’t handle me at my worst, then you sure as hell don’t deserve me at my best.”– Marilyn Monroe', '“Get busy living or get busy dying.”– Stephen King', '"Time moves in one direction, memory in another." \n~ William Gibson', '"The sky above the port was the color of television, tuned to a dead station." \n~ William Gibson', '"Before you diagnose yourself with depression or low self-esteem, first make sure that you are not, in fact, just surrounded by assholes." \n~ William Gibson', '"When you want to know how things really work, study them when they\'re coming apart." \n~ William Gibson', '"Anything that can be done to a rat can be done to a human being. And we can do most anything to rats. This is a hard thing to think about, but it\'s the truth. It won\'t go away because we cover our eyes. THAT is cyberpunk." \n~ Bruce Sterling', '"Japan is a wonderful country, a strange mixture of ancient mystique and cyberpunk saturation. It\'s a monolith of society\'s achievements, yet maintains a foothold in the past, creating an amazing backdrop for tourings and natives alive. Japan captures the imagination like no other. You never feel quite so far from home as you do in Japan, yet there are no other people on the planet that make you feel as comfortable." \n~ Corey Taylor', '“Twenty years from now you will be more disappointed by the things that you didn’t do than by the ones you did do.” \n– Mark Twain', '“When I dare to be powerful – to use my strength in the service of my vision, then it becomes less and less important whether I am afraid.” \n– Audre Lorde', '“Those who dare to fail miserably can achieve greatly.” \n– John F. Kennedy', '“Love yourself first and everything else falls into line. You really have to love yourself to get anything done in this world.” \n– Lucille Ball', '“It is our choices, that show what we truly are, far more than our abilities.”\n– J. K Rowling', '“If you want to be happy, be.” \n– Leo Tolstoy', '“If you want to live a happy life, tie it to a goal, not to people or things.” \n– Albert Einstein', '“I never knew how to worship until I knew how to love.” \n– Henry Ward Beecher', '“Life is trying things to see if they work.” \n– Ray Bradbury', '“If life were predictable it would cease to be life, and be without flavor.” \n– Eleanor Roosevelt', '“Yesterday is history, tomorrow is a mystery, today is a gift of God, which is why we call it the present.” \n– Bil Keane', '“You miss 100 percent of the shots you never take.” \n– Wayne Gretzky', '“Always forgive your enemies; nothing annoys them so much.” \n– Oscar Wilde']
@@ -145,55 +144,40 @@ async function msgHandler (client, message) {
             .catch((err) => console.log(err))
           break*/
         case '#genre':
-          if (body.length > 8) {
-            kunci = body.substr(7)
-            gens = kunci.trim().split(' ')
-            mal.findGenre(gens[0], gens[1], gen[2])
-          .then(info => console.log(info))
-          .catch(err => console.log(err))
+          if (args.length >= 4) {
+          const { mal_url, anime } = await mal.findGenre(args[1], parseInt(args[2]), parseInt(args[3]))
+            if (Array.isArray(anime)) {
+              i = 1
+              pesan = mal_url.name + "\n"
+              for (const ani of anime) {
+                genre = ""
+                for (const gens of ani.genres) {
+                  genre = genre + gens.name + ", "
+                }
+                pesan = pesan + i + ". *_"+ani.title+"_*\n"+genre+"\nSkor :"+ani.score
+                i++
+                if(i>29) {
+                  break;
+                } else {
+                  pesan = pesan + "\n\n"
+                }
+              }
+              client.sendText(from, pesan)
+            }
           }
           break
         case '#anime':
           if (body.length > 8) {
             kunci = body.substr(7)
-            const { id } = await malScraper.getInfoFromName(kunci)
-            //mal.findAnime(id)
-            //.then(info => console.log(info))
-            //c.catch(err => console.log(err))
-            //malScraper.getInfoFromURL(url)
-            //.then((data) => console.log(data))
-            //.catch((err) => console.log(err))
-                      
+            const { id } = await malScraper.getInfoFromName(kunci)      
             const { title, image_url , score, synopsis, episodes, aired, rating, status, genres } = await mal.findAnime(id)
             genre = ""
             for (const gen of genres) {
               genre = genre + gen.name+ ", "
             }
-            //const { text } =  await translate(synopsis, {to : 'id'})
             await client.sendFileFromUrl(from, `${image_url}`, 'Anime.png', '⛩️Title:' + `${title}` + '\n\n🎼️Score:' + `${score}` + '\n\n📙️Status:' + `${status}` + '\n\n🖼️Episodes:' + `${episodes}` + '\n\n✨️Rating:' + `${rating}` + '\n\n📆️Aired:' + `${aired.string}` + '\n\n🎭Genre:' + genre + '\n\n🌠️Synopsis:' + `${synopsis}` )
           
           }
-          /*if (args.length >= 5) {
-            const { title, picture, score, synopsis, episodes, aired, rating, status } = await malScraper.getInfoFromName(args[1] + '-' + args[2] + '-' + args[3] + '-' + args[4])
-
-            await client.sendFileFromUrl(from, `${picture}`, 'Anime.png', '⛩️Title:' + `${title}` + '\n\n🎼️Score:' + `${score}` + '\n\n📙️Status:' + `${status}` + '\n\n🖼️Episodes:' + `${episodes}` + '\n\n✨️Rating:' + `${rating}` + '\n\n🌠️Synopsis:' + `${synopsis}` + '\n\n📆️Aired:' + `${aired}` + '.')
-          } else if (args.length >= 4) {
-            const { title, picture, score, synopsis, episodes, aired, rating, status } = await malScraper.getInfoFromName(args[1] + '-' + args[2] + '-' + args[3])
-
-            await client.sendFileFromUrl(from, `${picture}`, 'Anime.png', '⛩️Title:' + `${title}` + '\n\n🎼️Score:' + `${score}` + '\n\n📙️Status:' + `${status}` + '\n\n🖼️Episodes:' + `${episodes}` + '\n\n✨️Rating:' + `${rating}` + '\n\n🌠️Synopsis:' + `${synopsis}` + '\n\n📆️Aired:' + `${aired}` + '.')
-          } else if (args.length >= 3) {
-            const { title, picture, score, synopsis, episodes, aired, rating, status } = await malScraper.getInfoFromName(args[1] + '-' + args[2])
-
-            await client.sendFileFromUrl(from, `${picture}`, 'Anime.png', '⛩️Title:' + `${title}` + '\n\n🎼️Score:' + `${score}` + '\n\n📙️Status:' + `${status}` + '\n\n🖼️Episodes:' + `${episodes}` + '\n\n✨️Rating:' + `${rating}` + '\n\n🌠️Synopsis:' + `${synopsis}` + '\n\n📆️Aired:' + `${aired}` + '.')
-          } else {
-            malScraper.getInfoFromName(args[1])
-              .then((data) => console.log(data))
-              .catch((err) => console.log(err))
-
-            const { title, picture, score, synopsis, episodes, aired, rating, status } = await malScraper.getInfoFromName(args[1])
-
-            await client.sendFileFromUrl(from, `${picture}`, 'Anime.png', '⛩️Title:' + `${title}` + '\n\n🎼️Score:' + `${score}` + '\n\n📙️Status:' + `${status}` + '\n\n🖼️Episodes:' + `${episodes}` + '\n\n✨️Rating:' + `${rating}` + '\n\n🌠️Synopsis:' + `${synopsis}` + '\n\n📆️Aired:' + `${aired}` + '.')
-          }*/
           break
         case '#manga':
 
@@ -334,7 +318,7 @@ async function msgHandler (client, message) {
                       for(let tipe of TV) {
                           i++
                           pesan = pesan +"_"+ tipe.title +"_" + "\n" + "Tanggal rilis :" + tipe.releaseDate + "\n" + "Genre :" + tipe.genres + "\n" + "Score :" + tipe.score
-                          if(i>9) {
+                          if(i>19) {
                             break;
                           } else {
                             pesan = pesan + "\n\n"
@@ -346,7 +330,7 @@ async function msgHandler (client, message) {
                       for(let tipe of OVAs) {
                           i++
                           pesan = pesan +"_"+ tipe.title +"_" + "\n" + "Tanggal rilis :" + tipe.releaseDate + "\n" + "Genre :" + tipe.genres + "\n" + "Score :" + tipe.score
-                          if(i>9) {
+                          if(i>19) {
                             break;
                           } else {
                             pesan = pesan + "\n\n"
@@ -358,7 +342,7 @@ async function msgHandler (client, message) {
                       for(let tipe of ONAs) {
                           i++
                           pesan = pesan +"_"+ tipe.title +"_" + "\n" + "Tanggal rilis :" + tipe.releaseDate + "\n" + "Genre :" + tipe.genres + "\n" + "Score :" + tipe.score
-                          if(i>9) {
+                          if(i>19) {
                             break;
                           } else {
                             pesan = pesan + "\n\n"
@@ -370,7 +354,7 @@ async function msgHandler (client, message) {
                       for(let tipe of Movies) {
                           i++
                           pesan = pesan +"_"+ tipe.title +"_" + "\n" + "Tanggal rilis :" + tipe.releaseDate + "\n" + "Genre :" + tipe.genres + "\n" + "Score :" + tipe.score
-                          if(i>9) {
+                          if(i>19) {
                             break;
                           } else {
                             pesan = pesan + "\n\n"
@@ -382,7 +366,7 @@ async function msgHandler (client, message) {
                       for(let tipe of Specials) {
                           i++
                           pesan = pesan +"_"+ tipe.title +"_" + "\n" + "Tanggal rilis :" + tipe.releaseDate + "\n" + "Genre :" + tipe.genres + "\n" + "Score :" + tipe.score
-                          if(i>9) {
+                          if(i>19) {
                             break;
                           } else {
                             pesan = pesan + "\n\n"
