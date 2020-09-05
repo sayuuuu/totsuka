@@ -56,7 +56,7 @@ async function msgHandler (client, message) {
     const { pushname } = sender
     const { formattedTitle } = chat
     const time = moment(t * 1000).format('DD/MM HH:mm:ss')
-    const commands = ['#menu', '#help', '#sticker', '#quotes', '#stiker', '#hello', '#info', '#commands', '#god', 'thank you', 'i love you', '#musim', '#anime', '#anime', '#do you love me', '#tsundere', 'ara ara', 'yo', 'freedom', 'i love rem', 'I Love Rem', 'el Psy Congroo', 'tuturu', 'indeed','#neko', '#wallpaper', '#source', 'bikin kopi', '#pokemon', '#pokewall', '#wiki', '#emilia', '#rem', '#rem', '#tiktok', '#ig', '#instagram', '#twt', '#twitter', '#fb', '#facebook', '#groupinfo', '#meme', '#covid', '#sr', '#test', '#manga', '#user', '#TestGif', '#kick', '#leave', '#add', '#Faq', '#profile', '#koin', '#dadu', '#animeneko','chat.whatsapp.com']
+    const commands = ['#genre','#menu', '#help', '#sticker', '#quotes', '#stiker', '#hello', '#info', '#commands', '#god', 'thank you', 'i love you', '#musim', '#anime', '#anime', '#do you love me', '#tsundere', 'ara ara', 'yo', 'freedom', 'i love rem', 'I Love Rem', 'el Psy Congroo', 'tuturu', 'indeed','#neko', '#wallpaper', '#source', 'bikin kopi', '#pokemon', '#pokewall', '#wiki', '#emilia', '#rem', '#rem', '#tiktok', '#ig', '#instagram', '#twt', '#twitter', '#fb', '#facebook', '#groupinfo', '#meme', '#covid', '#sr', '#test', '#manga', '#user', '#TestGif', '#kick', '#leave', '#add', '#Faq', '#profile', '#koin', '#dadu', '#animeneko','chat.whatsapp.com']
     const cmds = commands.map(x => x + '\\b').join('|')
     const cmd = type === 'chat' ? body.match(new RegExp(cmds, 'gi')) : type === 'image' && caption ? caption.match(new RegExp(cmds, 'gi')) : ''
 
@@ -133,16 +133,6 @@ async function msgHandler (client, message) {
         case '#testGif' :
           client.sendStickerfromUrl(from, 'https://media.tenor.com/images/62c4b269d97c2412c4f364945f62afae/tenor.gif', { method: 'get' })
           break
-        /*case '#user':
-          const username = 'BanTakahiro01'
-          const after = 25
-          const type = 'anime' // can be either `anime` or `manga`
-
-          // Get you an object containing all the entries with status, score... from this user's watch list
-          malScraper.getWatchListFromUser(username, after, type)
-            .then((data) => console.log(data))
-            .catch((err) => console.log(err))
-          break*/
         case '#genre':
           if (args.length >= 4) {
           const { mal_url, anime } = await mal.findGenre(args[1], parseInt(args[2]), parseInt(args[3]))
