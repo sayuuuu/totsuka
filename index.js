@@ -144,6 +144,15 @@ async function msgHandler (client, message) {
             .then((data) => console.log(data))
             .catch((err) => console.log(err))
           break*/
+        case '#genre':
+          if (body.length > 8) {
+            kunci = body.substr(7)
+            gens = kunci.trim().split(' ')
+            mal.findGenre(gens[0], gens[1], gen[2])
+          .then(info => console.log(info))
+          .catch(err => console.log(err))
+          }
+          break
         case '#anime':
           if (body.length > 8) {
             kunci = body.substr(7)
