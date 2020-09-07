@@ -134,13 +134,13 @@ async function msgHandler (client, message) {
           client.sendStickerfromUrl(from, 'https://media.tenor.com/images/62c4b269d97c2412c4f364945f62afae/tenor.gif', { method: 'get' })
           break
         case '#kodegenre':
-          pesan = "Action: 1\nAdventure: 2\nCars: 3\nComedy: 4\nDementia: 5	\nDemons: 6	\nMystery: 7	\nDrama: 8	\nEcchi: 9\nFantasy: 10	\nGame: 11	\nHistorical: 13	\nHorror: 14\nKids: 15	\nMagic: 16	\nMartial Arts: 17\nMecha: 18	\nMusic: 19	\nParody: 20	\nSamurai: 21	\nRomance: 22	\nSchool: 23	\nSci Fi: 24	\nShoujo: 25	\nShoujo Ai: 26	\nShounen: 27	\nShounen Ai: 28\nSpace: 29	\nSports: 30	\nSuper Power: 31\nVampire: 32\nYaoi: 33	\nYuri: 34\nHarem: 35\nSlice Of Life: 36\nSupernatural: 37\nMilitary: 38\nPolice: 39\nPsychological: 40\nThriller: 41\nSeinen: 42\nJosei: 43"
+          pesan = "Action: 1\nAdventure: 2\nCars: 3\nComedy: 4\nDementia: 5	\nDemons: 6	\nMystery: 7	\nDrama: 8	\nnFantasy: 10	\nGame: 11	\nHistorical: 13	\nHorror: 14\nKids: 15	\nMagic: 16	\nMartial Arts: 17\nMecha: 18	\nMusic: 19	\nParody: 20	\nSamurai: 21	\nRomance: 22	\nSchool: 23	\nSci Fi: 24	\nShoujo: 25	\nShounen: 27	\nSpace: 29	\nSports: 30	\nSuper Power: 31\nVampire: 32\nHarem: 35\nSlice Of Life: 36\nSupernatural: 37\nMilitary: 38\nPolice: 39\nPsychological: 40\nThriller: 41\nSeinen: 42\nJosei: 43"
           client.sendText(from, pesan)
           break
         case '#genre':
           if (args.length >= 4) {
           const { mal_url, anime } = await mal.findGenre(args[1], parseInt(args[2]), parseInt(args[3]))
-            if (Array.isArray(anime) && args[2]!="12") {
+            if (Array.isArray(anime) && args[2]!="12" && args[2]!="9" && args[2]!="26" && args[2]!="28" && args[2]!="33" args[2]!="34") {
               i = 1
               pesan = mal_url.name + "\n"
               for (const ani of anime) {
