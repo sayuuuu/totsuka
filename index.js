@@ -140,7 +140,7 @@ async function msgHandler (client, message) {
         case '#genre':
           if (args.length >= 4) {
           const { mal_url, anime } = await mal.findGenre(args[1], parseInt(args[2]), parseInt(args[3]))
-            if (Array.isArray(anime) && args[2]!="12" && args[2]!="9" && args[2]!="26" && args[2]!="28" && args[2]!="33" args[2]!="34") {
+            if ((Array.isArray(anime) && args[2]!="12") && (args[2]!="9" && args[2]!="26") && (args[2]!="28" && args[2]!="33") && args[2]!="34") {
               i = 1
               pesan = mal_url.name + "\n"
               for (const ani of anime) {
