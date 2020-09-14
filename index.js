@@ -56,7 +56,7 @@ async function msgHandler (client, message) {
     const { pushname } = sender
     const { formattedTitle } = chat
     const time = moment(t * 1000).format('DD/MM HH:mm:ss')
-    const commands = ['#kodegenre', '#genre','#menu', '#help', '#sticker', '#quotes', '#stiker', '#hello', '#info', '#commands', '#god', 'thank you', 'i love you', '#musim', '#anime', '#anime', '#do you love me', '#tsundere', 'ara ara', 'yo', 'freedom', 'i love rem', 'I Love Rem', 'el Psy Congroo', 'tuturu', 'indeed','#neko', '#wallpaper', '#source', 'bikin kopi', '#pokemon', '#pokewall', '#wiki', '#emilia', '#rem', '#rem', '#tiktok', '#ig', '#instagram', '#twt', '#twitter', '#fb', '#facebook', '#groupinfo', '#meme', '#covid', '#sr', '#test', '#manga', '#user', '#TestGif', '#kick', '#leave', '#add', '#Faq', '#profile', '#koin', '#dadu', '#animeneko','chat.whatsapp.com']
+    const commands = ['#news', 'hai','#kodegenre', '#genre','#menu', '#help', '#sticker', '#quotes', '#stiker', '#hello', '#info', '#commands', '#god', 'thank you', 'i love you', '#musim', '#anime', '#anime', '#do you love me', '#tsundere', 'ara ara', 'yo', 'freedom', 'i love rem', 'I Love Rem', 'el Psy Congroo', 'tuturu', 'indeed','#neko', '#wallpaper', '#source', 'bikin kopi', '#pokemon', '#pokewall', '#wiki', '#emilia', '#rem', '#rem', '#tiktok', '#ig', '#instagram', '#twt', '#twitter', '#fb', '#facebook', '#groupinfo', '#meme', '#covid', '#sr', '#test', '#manga', '#user', '#TestGif', '#kick', '#leave', '#add', '#Faq', '#profile', '#koin', '#dadu', '#animeneko','chat.whatsapp.com']
     const cmds = commands.map(x => x + '\\b').join('|')
     const cmd = type === 'chat' ? body.match(new RegExp(cmds, 'gi')) : type === 'image' && caption ? caption.match(new RegExp(cmds, 'gi')) : ''
 
@@ -68,12 +68,15 @@ async function msgHandler (client, message) {
       switch (cmd[0].toLowerCase()) {
         case '#menu':
         case '#help':
-          client.sendText(from, `👋️Yahallo *${pushname}*, Aku Yui-chan:)\n\n*Aku harus ngapain nich??*✨\n\n*_#stiker_*\n*Buat ngubah gambar ke stiker*\n\n*_#anime <judul anime>_*\n*Menampilkan deskripsi anime*\n\n*_#genre_*\n*Untuk menampilkan anime berdasarkan genre, contoh: #genre anime 2 1\nKata anime bisa diubah jadi manga, angka 2 merujuk pada kode genre, silakan ketik #kodegenre untuk tau kode setiap genre. Angka satu menunjukkan page/halaman, karena bisa jadi hasilnya banyak banget, so makanya dibikin page*\n\n*_#koin_*\n*Buat lempar koin*\n\n*_#dadu_*\n*Buat lempar dadu*\n\n*_#neko_*\n*Yo yang mau kucheng*\n\n*_#meme_*\n*Random meme dari r\/wholesomeanimememes*\n\n*_#waifu_*\n*_#covid <nama negara>_*\n*Info statistik langsung dari negara yang diminta*\n\n*_#quotes_*\n*Untuk sementara, quotesnya bahasa inggris ya:(*\n\n*_#pokemon_*\n*Ngasih gambar pokemon secara manasuka (random)*\n\n*_#musim <season> <tahun> <tipe(optional)>_*\n*Menampilkam list anime dari musim yang diminta. Terus tipe itu optional sih bisa ditambahin kata tv, ova, ona, movie, dan special. Contohnya: #musim winter 2019 ova. Bisa juga tanpa tipe misal #musim winter 2019*\n\n*_#info_*\n*Buat kenalan siapa sih Yui-chan?*\n\nBanyak kata kunci tersembunyi, btw ;)\n\n`)
+          client.sendText(from, `👋️Yahallo *${pushname}*, Aku Yui-chan:)\n\n*Aku harus ngapain nich??*✨\n\n*_#news <jumlah>_*\nMenampilkan berita terbaru sesuai jumlah yang dikasih. Misal #news 20, akan menampilkan 20 berita terbaru.\n\n*_#stiker_*\nBuat ngubah gambar ke stiker\n\n*_#anime <judul anime>_*\nMenampilkan deskripsi anime\n\n*_#genre_*\nUntuk menampilkan anime berdasarkan genre, contoh: #genre anime 2 1\nKata anime bisa diubah jadi manga, angka 2 merujuk pada kode genre, silakan ketik #kodegenre untuk tau kode setiap genre. Angka satu menunjukkan page/halaman, karena bisa jadi hasilnya banyak banget, so makanya dibikin page\n\n*_#koin_*\nBuat lempar koin\n\n*_#dadu_*\nBuat lempar dadu\n\n*_#neko_*\nYo yang mau kucheng\n\n*_#meme_*\nRandom meme dari r\/wholesomeanimememes\n\n*_#covid <nama negara>_*\nInfo statistik langsung dari negara yang diminta\n\n*_#quotes_*\nUntuk sementara, quotesnya bahasa inggris ya:(\n\n*_#pokemon_*\nNgasih gambar pokemon secara manasuka (random)\n\n*_#musim <season> <tahun> <tipe(optional)>_*\nMenampilkam list anime dari musim yang diminta. Terus tipe itu optional sih bisa ditambahin kata tv, ova, ona, movie, dan special. Contohnya: #musim winter 2019 ova. Bisa juga tanpa tipe misal #musim winter 2019\n\n*_#info_*\nBuat kenalan siapa sih Yui-chan?*\n\nBanyak kata kunci tersembunyi, btw ;)\n\n`)
           break
         case '#hello':
           await client.simulateTyping(from, true)
           client.sendText(from, `👋️Yahallo *${pushname}-senpai*, ada yang bisa dibantu?`)
           await client.simulateTyping(from, false)
+          break
+        case 'hai':
+          client.sendText(from, `Hallo ${pushname}`)
           break
         case '#grouplink':
           if (isGroupMsg) {
@@ -213,46 +216,28 @@ async function msgHandler (client, message) {
           const { title, url } = response.data
           await client.sendFileFromUrl(from, `${url}`, 'meme.jpg', `${title}`)
           break
-        /*case '#sr':
-
-           if (args.length >=4) {
-           const sr = args[1]
-           const rs = args[2]                 
-           const tr = args[3]
-           const response = await axios.get('https://meme-api.herokuapp.com/gimme/'+sr+'_'+rs+'_'+tr+'/');
-           const { postLink, title, subreddit, url, nsfw, spoiler } = response.data
-           if (`${nsfw}` == 'true'){
-               if (isGroupMsg) {
-                 if (`${chatId}` == '919744375687-1596550546@g.us'){
-                          await client.sendFileFromUrl(from, `${url}`, 'Reddit.jpg', `${title}`+'\n\nPostlink:'+`${postLink}`)
-                  } else client.sendText(from, 'NSFW contents can\'t be displayed on groups')
-                } else await client.sendFileFromUrl(from, `${url}`, 'Reddit.jpg', `${title}`+'\n\nPostlink:'+`${postLink}`)
-              } else await client.sendFileFromUrl(from, `${url}`, 'Reddit.jpg', `${title}`+'\n\nPostlink:'+`${postLink}`)
-         } else if (args.length >=3) {
-           const sr = args[1]
-           const rs = args[2]
-           const response = await axios.get('https://meme-api.herokuapp.com/gimme/'+sr+'_'+rs+'/');
-           const { postLink, title, subreddit, url, nsfw, spoiler } = response.data
-           if (`${nsfw}` == 'true'){
-               if (isGroupMsg) {
-                 if (`${chatId}` == '919744375687-1596550546@g.us'){
-                          await client.sendFileFromUrl(from, `${url}`, 'Reddit.jpg', `${title}`+'\n\nPostlink:'+`${postLink}`)
-                  } else client.sendText(from, 'NSFW contents can\'t be displayed on groups')
-                } else await client.sendFileFromUrl(from, `${url}`, 'Reddit.jpg', `${title}`+'\n\nPostlink:'+`${postLink}`)
-              } else await client.sendFileFromUrl(from, `${url}`, 'Reddit.jpg', `${title}`+'\n\nPostlink:'+`${postLink}`)
-          } else if (args.length >=2) {
-            const sr = args[1]
-            const response = await axios.get('https://meme-api.herokuapp.com/gimme/'+sr+'/');
-            const { postLink, title, subreddit, url, nsfw, spoiler } = response.data
-                if (`${nsfw}` == 'true'){
-                   if (isGroupMsg) {
-                     if (`${chatId}` == '919744375687-1596550546@g.us'){
-                     await client.sendFileFromUrl(from, `${url}`, 'Reddit.jpg', `${title}`+'\n\nPostlink:'+`${postLink}`)
-                  } else client.sendText(from, 'NSFW contents can\'t be displayed on groups')
-                } else await client.sendFileFromUrl(from, `${url}`, 'Reddit.jpg', `${title}`+'\n\nPostlink:'+`${postLink}`)
-              } else await client.sendFileFromUrl(from, `${url}`, 'Reddit.jpg', `${title}`+'\n\nPostlink:'+`${postLink}`)
-                    }
-                break;*/
+        //case '#shorturl': //bitly token: a38eb184b07313e1ce202c247cfdb9a0045a2697
+        case '#news':
+          const respons = await axios.get('http://newsapi.org/v2/top-headlines?country=id&apiKey=b2d3b1c264c147ae88dba39998c23279')
+          const { totalResults, articles } = respons.data
+          res = totalResults
+          if (args[1] >= totalResults) {
+            res = totalResults
+          } else {
+            res = args[1]
+          }
+          i = 0
+          for (const isi of articles) {
+            i++
+            pesan = '_*Berita Terbaru Hari Ini*_\n\n' + i + '. ' + '_' + isi.title + '_' + '\n' + isi.publishedAt + '\n' + isi.description + '\n' + isi.url
+            if (i<res) {
+              pesen = pesan + '\n\n'
+            } else if(i > res){
+              break
+            }
+          }
+          await client.sendText(from, pesan)
+          break
         case '#covid':
           if (args.length >= 2) {
             const response = await axios.get('https://coronavirus-19-api.herokuapp.com/countries/' + args[1] + '/')
@@ -269,10 +254,6 @@ async function msgHandler (client, message) {
         case 'yo':
           client.sendText(from, 'Hiya *High-fives*')
           break
-        /*case '#waifu':
-          q8 = q2 = Math.floor(Math.random() * 98) + 10
-          client.sendFileFromUrl(from, 'http://randomwaifu.altervista.org/images/00' + q8 + '.png', 'Waifu.png', 'How is she?') // UwU)/ Working Fine
-          break*/
         case '#neko':
           q2 = Math.floor(Math.random() * 900) + 300
           q3 = Math.floor(Math.random() * 900) + 300
@@ -282,12 +263,6 @@ async function msgHandler (client, message) {
           q7 = Math.floor(Math.random() * 890) + 1
           client.sendFileFromUrl(from, 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/' + q7 + '.png', 'Pokemon.png')
           break
-        /*case '#wallpaper' :
-        { const response1 = await axios.get('https://meme-api.herokuapp.com/gimme/Animewallpaper')
-          const { title, url } = response1.data
-          await client.sendFileFromUrl(from, `${url}`, 'meme.jpg', `${title}`)
-          break
-        }*/
         case '#tsundere' :
           client.sendText(from, 'Yui-chan nggak tsundere, baka!')
           break
@@ -371,8 +346,6 @@ async function msgHandler (client, message) {
               client.sendText(from, pesan)
               //client.sendText(from, "Data tidak ditemukan")
             }
-              //{ title, score, episodes, aired, rating, status, genres } = malScraper.getSeason(year, season)) {
-          //client.sendText(from, 'Summer 2020 \n Re:Zero kara Hajimeru Isekai Seikatsu 2nd Season \n Yahari Ore no Seishun Love Comedy wa Machigatteiru. Kan \n The God of High School \n Sword Art Online: Alicization - War of Underworld 2nd Season \n Enen no Shouboutai: Ni no Shou \n Maou Gakuin no Futekigousha: Shijou Saikyou no Maou no Shiso, Tensei shite Shison-tachi no Gakkou e \n Kanojo, Okarishimasu \n Deca-Dence \n Uzaki-chan wa Asobitai! \n Monster Musume no Oishasan')
           break
         case '#thank you':
           client.sendText(from, 'Kochira koso *smiles*')
