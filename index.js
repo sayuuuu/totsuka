@@ -227,9 +227,10 @@ async function msgHandler (client, message) {
             res = args[1]
           }
           i = 0
+          pesan = ''
           for (const isi of articles) {
             i++
-            pesan = '_*Berita Terbaru Hari Ini*_\n\n' + i + '. ' + '_' + isi.title + '_' + '\n' + isi.publishedAt + '\n' + isi.description + '\n' + isi.url
+            pesan = pesan + '_*Berita Terbaru Hari Ini*_\n\n' + i + '. ' + '_' + isi.title + '_' + '\n' + isi.publishedAt + '\n' + isi.description + '\n' + isi.url
             if (i<res) {
               pesen = pesan + '\n\n'
             } else if(i > res){
