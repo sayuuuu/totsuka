@@ -100,12 +100,6 @@ async function msgHandler (client, message) {
         case 'bikin kopi':
           client.reply(from, 'Idih bikin aja sendiri ckckck')
           break
-        case 'i love you':
-          client.reply(from, 'I love you too ;)')
-          break
-        case '#animeneko':
-          client.sendFileFromUrl(from, akaneko.neko(), 'neko.jpg', 'Neko *Nyaa*~')
-          break
         case '#dadu':
           const dice = Math.floor(Math.random() * 6) + 1
           await client.sendStickerfromUrl(from, 'https://www.random.org/dice/dice' + dice + '.png', { method: 'get' })
@@ -118,9 +112,6 @@ async function msgHandler (client, message) {
             client.sendStickerfromUrl(from, 'https://i.ibb.co/bLsRM2P/2003-indonesia-500-rupiah-copy-1.png', { method: 'get' })
           }
           break
-        case '#add':
-          await client.addParticipant('919744375687-1596199727@g.us', `${ContactId}`)
-          break
         case 'chat.whatsapp.com':
           if (args[1] == client.getGroupInviteLink(chat.id)) {
           break
@@ -129,13 +120,6 @@ async function msgHandler (client, message) {
           break
         case '#do you love me?':
           client.sendText(from, 'Apasigaje:P')
-          break
-        case '#test':
-          client.sendImageAsStickerGif(from, 'https://i.imgur.com/31zUM5g.gif')
-          break
-        case '#testGif' :
-          client.sendStickerfromUrl(from, 'https://media.tenor.com/images/62c4b269d97c2412c4f364945f62afae/tenor.gif', { method: 'get' })
-          break
         case '#kodegenre':
           pesan = "Action: 1\nAdventure: 2\nCars: 3\nComedy: 4\nDementia: 5	\nDemons: 6	\nMystery: 7	\nDrama: 8	\nnFantasy: 10	\nGame: 11	\nHistorical: 13	\nHorror: 14\nKids: 15	\nMagic: 16	\nMartial Arts: 17\nMecha: 18	\nMusic: 19	\nParody: 20	\nSamurai: 21	\nRomance: 22	\nSchool: 23	\nSci Fi: 24	\nShoujo: 25	\nShounen: 27	\nSpace: 29	\nSports: 30	\nSuper Power: 31\nVampire: 32\nHarem: 35\nSlice Of Life: 36\nSupernatural: 37\nMilitary: 38\nPolice: 39\nPsychological: 40\nThriller: 41\nSeinen: 42\nJosei: 43"
           client.sendText(from, pesan)
@@ -186,31 +170,6 @@ async function msgHandler (client, message) {
           }
 
           break
-
-        case '#wiki':
-          if (args.length >= 2) {
-            const query = args[1]
-            wiki()
-              .page(query)
-              .then(page => page.info())
-              .then(console.log)
-          }
-          break
-        case '#faq' :
-          client.sendText(from, '👋️Hello ' + `${pushname}` + '\n\nSupport Group; https:\/\/bit.ly\/2CaPFyk\nGithub: https:\/\/bit.ly\/39Ld2L8\n\nThese are some of the frequently asked questions\n\nQ: Why was this bot created?\nA: We the developers wanted to increase our knowledge in JavaScript at the same time giving bac to the community\n\nQ: Will the bot ban you if you use unlisted commands?\nA: No, we\'ll not ban you if you use unlisted commands because every person isn\'t perfect, a person will make a typo or two, so we do not punish you\n\nQ: Will the bot ban you if you call the bot?\nA: No, But the bot can\'t pickup the call. Humans make mistake. we are not gonna punish you for that. Our bot is able to ban as well as block people but we won\'t do that. \n\nQ: How to make a bot like \"Emilia\"?\nA: You need to know JavaScript and Node.js If you want to, you can use our code for creating your bot. It\'d be great if you credit us if you do so, it is not necessary though.\n\nQ: Does the bot go offline?\nA: Yes, The bot services will go down for 6 or so hours because our servers are limited. The bot will be able to run for 24\/7 soon.\n \nQ: How to use the bot?\nA: Send \"#help\" to see the usable commands.\n\nQ: Who are \"Link\" and \"Zelda\"?\nA: Link and Zelda are the main charterers from The Legend of Zelda Video Game series. \n\n✨️Hope you have fun using our bot! Have a great day\n\n')
-          break
-        case '#pokewall' :
-          q9 = Math.floor(Math.random() * 199) + 1
-          client.sendFileFromUrl(from, 'http://localhost:8082/Pokemon/wallpapersanimesv.blogspot.com-(' + q9 + ').jpg', 'Pokemon.jpg', 'Here is your Pokemon Wallpaper')
-          break
-        case '#emilia' :
-          q11 = Math.floor(Math.random() * 21) + 10
-          client.sendFileFromUrl(from, 'http://0.0.0.0:8082/Emilia/' + q11 + '.png', 'Emilia.png', 'Emilia ✨️')
-          break
-        case '#rem' :
-          q12 = Math.floor(Math.random() * 9) + 1
-          client.sendFileFromUrl(from, 'http://0.0.0.0:8082/Rem/' + q12 + '.png', 'Rem.png', 'Rem ✨️')
-          break
         case '#meme':
           const response = await axios.get('https://meme-api.herokuapp.com/gimme/wholesomeanimemes')
           const { title, url } = response.data
@@ -245,15 +204,6 @@ async function msgHandler (client, message) {
             const { cases, todayCases, deaths, todayDeaths, active } = response.data
             await client.sendText(from, '🌎️Covid Info -' + args[1] + ' 🌍️\n\n✨️Total Cases: ' + `${cases}` + '\n📆️Today\'s Cases: ' + `${todayCases}` + '\n☣️Total Deaths: ' + `${deaths}` + '\n☢️Today\'s Deaths: ' + `${todayDeaths}` + '\n⛩️Active Cases: ' + `${active}` + '.')
           }
-          break
-        case 'el Psy Congroo':
-          client.sendFileFromUrl(from, 'https://i.ibb.co/s9Rw8hN/index.jpg', 'Steins;Gate.jpg', 'El Psy Congroo')
-          break
-        case 'i love rem' :
-          client.sendText(from, 'Who is Rem?')
-          break
-        case 'yo':
-          client.sendText(from, 'Hiya *High-fives*')
           break
         case '#neko':
           q2 = Math.floor(Math.random() * 900) + 300
@@ -357,10 +307,6 @@ async function msgHandler (client, message) {
         case '#quotes':
           a2 = Math.floor(Math.random() * 22)
           client.sendText(from, quote_Array[a2])
-          break
-          // MAKE SURE TO USE ; at the end of statement :)
-        case '#r':
-          client.sendText(from, 'Emilia')
           break
         case '#sticker':
         case '#stiker':
