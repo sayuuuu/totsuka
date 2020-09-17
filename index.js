@@ -68,7 +68,7 @@ async function msgHandler (client, message) {
       switch (cmd[0].toLowerCase()) {
         case '#menu':
         case '#help':
-          client.sendText(from, `👋️Yahallo *${pushname}*, Aku Yui-chan:)\n\n*Aku harus ngapain nich??*✨\n\n*_#news <jumlah>_*\nMenampilkan berita terbaru sesuai jumlah yang dikasih. Misal #news 20, akan menampilkan 20 berita terbaru.\n\n*_#stiker_*\nBuat ngubah gambar ke stiker\n\n*_#anime <judul anime>_*\nMenampilkan deskripsi anime\n\n*_#genre_*\nUntuk menampilkan anime berdasarkan genre, contoh: #genre anime 2 1\nKata anime bisa diubah jadi manga, angka 2 merujuk pada kode genre, silakan ketik #kodegenre untuk tau kode setiap genre. Angka satu menunjukkan page/halaman, karena bisa jadi hasilnya banyak banget, so makanya dibikin page\n\n*_#koin_*\nBuat lempar koin\n\n*_#dadu_*\nBuat lempar dadu\n\n*_#neko_*\nYo yang mau kucheng\n\n*_#meme_*\nRandom meme dari r\/wholesomeanimememes\n\n*_#covid <nama negara>_*\nInfo statistik langsung dari negara yang diminta\n\n*_#quotes_*\nUntuk sementara, quotesnya bahasa inggris ya:(\n\n*_#pokemon_*\nNgasih gambar pokemon secara manasuka (random)\n\n*_#musim <season> <tahun> <tipe(optional)>_*\nMenampilkam list anime dari musim yang diminta. Terus tipe itu optional sih bisa ditambahin kata tv, ova, ona, movie, dan special. Contohnya: #musim winter 2019 ova. Bisa juga tanpa tipe misal #musim winter 2019\n\n*_#info_*\nBuat kenalan siapa sih Yui-chan?*\n\nBanyak kata kunci tersembunyi, btw ;)\n\n`)
+          client.sendText(from, `👋️Yahallo *${pushname}*, Aku Yui-chan:)\n\n*Aku harus ngapain nich??*✨\n\n*_#rekomendasi <judul>_*\nMenampilkan rekomendasi anime yang mirip sama judul. Contoh: #rekomendasi hyouka .Nahh, bakal ngeluarin anime yang mirip sama hyouka.\n\n *_#news <jumlah>_*\nMenampilkan berita terbaru sesuai jumlah yang dikasih. Misal #news 20, akan menampilkan 20 berita terbaru.\n\n*_#stiker_*\nBuat ngubah gambar ke stiker\n\n*_#anime <judul anime>_*\nMenampilkan deskripsi anime\n\n*_#genre_*\nUntuk menampilkan anime berdasarkan genre, contoh: #genre anime 2 1\nKata anime bisa diubah jadi manga, angka 2 merujuk pada kode genre, silakan ketik #kodegenre untuk tau kode setiap genre. Angka satu menunjukkan page/halaman, karena bisa jadi hasilnya banyak banget, so makanya dibikin page\n\n*_#koin_*\nBuat lempar koin\n\n*_#dadu_*\nBuat lempar dadu\n\n*_#neko_*\nYo yang mau kucheng\n\n*_#meme_*\nRandom meme dari r\/wholesomeanimememes\n\n*_#covid <nama negara>_*\nInfo statistik langsung dari negara yang diminta\n\n*_#quotes_*\nUntuk sementara, quotesnya bahasa inggris ya:(\n\n*_#pokemon_*\nNgasih gambar pokemon secara manasuka (random)\n\n*_#musim <season> <tahun> <tipe(optional)>_*\nMenampilkam list anime dari musim yang diminta. Terus tipe itu optional sih bisa ditambahin kata tv, ova, ona, movie, dan special. Contohnya: #musim winter 2019 ova. Bisa juga tanpa tipe misal #musim winter 2019\n\n*_#info_*\nBuat kenalan siapa sih Yui-chan?*\n\nBanyak kata kunci tersembunyi, btw ;)\n\n`)
           break
         case '#hello':
           await client.simulateTyping(from, true)
@@ -178,10 +178,10 @@ async function msgHandler (client, message) {
                 genre = genre + gen.name+ ", "
               }
               if(rec.mal_id === idmost) {
-                pesan = pesan + "Anime yang Paling Direkomendasikan :\n_*"+`${title}`+"*_\n"+"Skor :"+`${score}`+"\n"+"Rilis :"+`${aired}`+"\n"+"Genre :" + genre + "\n" + "Direkomendasikan oleh "+rec.recommendation_count+ "orang\n"+"\n Top 10 Anime Rekomendasi Lainnya:\n"
+                pesan = pesan + "Anime yang Paling Direkomendasikan :\n_*"+`${title}`+"*_\n"+"Skor :"+`${score}`+"\n"+"Rilis :"+`${aired.string}`+"\n"+"Genre :" + genre + "\n" + "Direkomendasikan oleh "+rec.recommendation_count+ "orang\n"+"\n Top 10 Anime Rekomendasi Lainnya:\n"
               } else {
                 i++
-                pesan = pesan + i +". _*"+`${title}`+"*_\n"+"Skor :"+`${score}`+"\n"+"Rilis :"+`${aired}`+"\n"+"Genre :" + genre + "\n" + "Direkomendasikan oleh "+rec.recommendation_count+ "orang\n"
+                pesan = pesan + i +". _*"+`${title}`+"*_\n"+"Skor :"+`${score}`+"\n"+"Rilis :"+`${aired}`+"\n"+"Genre :" + genre + "\n" + "Direkomendasikan oleh "+rec.recommendation_count+ " orang\n\n"
               }
               if(i >= 11) {
                 break
