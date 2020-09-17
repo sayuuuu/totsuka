@@ -178,7 +178,7 @@ async function msgHandler (client, message) {
                 genre = genre + gen.name+ ", "
               }
               if(rec.mal_id === idmost) {
-                pesan = pesan + "Anime yang Paling Direkomendasikan :\n_*"+`${title}`+"*_\n"+"Skor :"+`${score}`+"\n"+"Rilis :"+`${aired.string}`+"\n"+"Genre :" + genre + "\n" + "Direkomendasikan oleh "+rec.recommendation_count+ "orang\n"+"\n *_Top 10 Anime Rekomendasi Lainnya:_*\n\n"
+                pesan = pesan + "Anime yang Paling Direkomendasikan :\n_*"+`${title}`+"*_\n"+"Skor :"+`${score}`+"\n"+"Rilis :"+`${aired.string}`+"\n"+"Genre :" + genre + "\n" + "Direkomendasikan oleh "+rec.recommendation_count+ " orang\n"+"\n *_Top 10 Anime Rekomendasi Lainnya:_*\n\n"
               } else {
                 i++
                 pesan = pesan + i +". _*"+`${title}`+"*_\n"+"Skor :"+`${score}`+"\n"+"Rilis :"+`${aired.string}`+"\n"+"Genre :" + genre + "\n" + "Direkomendasikan oleh "+rec.recommendation_count+ " orang\n\n"
