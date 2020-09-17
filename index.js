@@ -170,6 +170,7 @@ async function msgHandler (client, message) {
             img = most.image_url
             idmost = most.mal_id
             i = 0
+            pesan = ""
             for (const rec of recommendations ) {
               const { title, score, aired, genres } = await mal.findAnime(rec.mal_id)
               genre = ""
