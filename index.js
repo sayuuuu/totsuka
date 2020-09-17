@@ -56,7 +56,7 @@ async function msgHandler (client, message) {
     const { pushname } = sender
     const { formattedTitle } = chat
     const time = moment(t * 1000).format('DD/MM HH:mm:ss')
-    const commands = ['#news', 'hai','#kodegenre', '#genre','#menu', '#help', '#sticker', '#quotes', '#stiker', '#hello', '#info', '#commands', '#god', 'thank you', 'i love you', '#musim', '#anime', '#anime', '#do you love me', '#tsundere', 'ara ara', 'yo', 'freedom', 'i love rem', 'I Love Rem', 'el Psy Congroo', 'tuturu', 'indeed','#neko', '#wallpaper', '#source', 'bikin kopi', '#pokemon', '#pokewall', '#wiki', '#emilia', '#rem', '#rem', '#tiktok', '#ig', '#instagram', '#twt', '#twitter', '#fb', '#facebook', '#groupinfo', '#meme', '#covid', '#sr', '#test', '#manga', '#user', '#TestGif', '#kick', '#leave', '#add', '#Faq', '#profile', '#koin', '#dadu', '#animeneko','chat.whatsapp.com']
+    const commands = ['#rekomendasi','#news', 'hai','#kodegenre', '#genre','#menu', '#help', '#sticker', '#quotes', '#stiker', '#hello', '#info', '#commands', '#god', 'thank you', 'i love you', '#musim', '#anime', '#anime', '#do you love me', '#tsundere', 'ara ara', 'yo', 'freedom', 'i love rem', 'I Love Rem', 'el Psy Congroo', 'tuturu', 'indeed','#neko', '#wallpaper', '#source', 'bikin kopi', '#pokemon', '#pokewall', '#wiki', '#emilia', '#rem', '#rem', '#tiktok', '#ig', '#instagram', '#twt', '#twitter', '#fb', '#facebook', '#groupinfo', '#meme', '#covid', '#sr', '#test', '#manga', '#user', '#TestGif', '#kick', '#leave', '#add', '#Faq', '#profile', '#koin', '#dadu', '#animeneko','chat.whatsapp.com']
     const cmds = commands.map(x => x + '\\b').join('|')
     const cmd = type === 'chat' ? body.match(new RegExp(cmds, 'gi')) : type === 'image' && caption ? caption.match(new RegExp(cmds, 'gi')) : ''
 
@@ -160,16 +160,19 @@ async function msgHandler (client, message) {
           
           }
           break
-        case '#manga':
-
-          if (args.length >= 2) {
-            const name = args[1]
-            malScraper.getInfoFromName(name)
+        case '#rekomendasi':
+          if (body.length > 8) {
+            kunci = body.substr(7)
+            const { id } = await malScraper.getInfoFromName(kunci)      
+            const { title } = await mal.findAnime(id)
+            cmalScraper.getRecommendationsList({
+              name: title,
+              id: id
+            })
               .then((data) => console.log(data))
               .catch((err) => console.log(err))
           }
-
-          break
+          break  
         case '#meme':
           const response = await axios.get('https://meme-api.herokuapp.com/gimme/wholesomeanimemes')
           const { title, url } = response.data
@@ -186,10 +189,10 @@ async function msgHandler (client, message) {
             res = args[1]
           }
           i = 0
-          pesan = ''
+          pesan = '_*Berita Terbaru Hari Ini*_\n\n'
           for (const isi of articles) {
             i++
-            pesan = pesan + '_*Berita Terbaru Hari Ini*_\n\n' + i + '. ' + '_' + isi.title + '_' + '\n' + isi.publishedAt + '\n' + isi.description + '\n' + isi.url
+            pesan = pesan + i + '. ' + '_' + isi.title + '_' + '\n' + isi.publishedAt + '\n' + isi.description + '\n' + isi.url
             if (i<res) {
               pesen = pesan + '\n\n'
             } else if(i > res){
