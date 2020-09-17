@@ -165,7 +165,7 @@ async function msgHandler (client, message) {
             kunci = body.substr(7)
             const { id } = await malScraper.getInfoFromName(kunci)      
             const { title } = await mal.findAnime(id)
-            cmalScraper.getRecommendationsList({
+            malScraper.getRecommendationsList({
               name: title,
               id: id
             })
