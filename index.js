@@ -164,13 +164,29 @@ async function msgHandler (client, message) {
           if (body.length > 8) {
             kunci = body.substr(7)
             const { id } = await malScraper.getInfoFromName(kunci)      
-            const { title } = await mal.findAnime(id)
-            malScraper.getRecommendationsList({
-              name: title,
-              id: id
-            })
-              .then((data) => console.log(data))
-              .catch((err) => console.log(err))
+            const respons = await axios.get('http://api.jikan.moe/v3/anime/'+id+'/recommendations')
+            const { recommendations } = respons.data
+            most = recommendations[0]
+            img = most.image_url
+            idmost = most.mal_id
+            i = 0
+            for (const rec of recommendations ) {
+              const { title, score, aired, genres } = await mal.findAnime(rec.mal_id)
+              genre = ""
+              for (const gen of genres) {
+                genre = genre + gen.name+ ", "
+              }
+              if(rec.mal_id === idmost) {
+                pesan = pesan + "Anime yang Paling Direkomendasikan :\n_*"+`${title}`+"*_\n"+"Skor :"+`${score}`+"\n"+"Rilis :"+`${aired}`+"\n"+"Genre :" + genre + "\n" + "Direkomendasikan oleh "+rec.recommendation_count+ "orang\n"+"\n Top 10 Anime Rekomendasi Lainnya:\n"
+              } else {
+                i++
+                pesan = pesan + i +". _*"+`${title}`+"*_\n"+"Skor :"+`${score}`+"\n"+"Rilis :"+`${aired}`+"\n"+"Genre :" + genre + "\n" + "Direkomendasikan oleh "+rec.recommendation_count+ "orang\n"
+              }
+              if(i >= 11) {
+                break
+              }
+            }
+            await client.sendFileFromUrl(from, img , 'Anime.png', pesan)
           }
           break  
         case '#meme':
