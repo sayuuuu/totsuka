@@ -10,11 +10,11 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Somnath Das and Alen Yohannan",
+  "author": "Ryan Abdurohman",
   "license": "Apache-2.0",
   "dependencies": {
     "jikan-node": "xy137/jikan-node#master",
-    "@open-wa/wa-automate": "^2.0.22",
+    "@open-wa/wa-automate": "^2.1.6",
     "akaneko": "^3.0.2",
     "anime-scraper": "^3.1.1",
     "fbvideos": "^1.0.2",
@@ -23,6 +23,25 @@
     "mal-api": "^2.0.0",
     "mal-scraper": "^2.7.1",
     "moment": "^2.27.0",
-    "wa-decrypt": "^1.0.4"
+    "wa-decrypt": "^1.0.4",
+    "chalk": "^4.1.0",
+    "dotenv": "^8.2.0",
+    "file-type": "^15.0.1",
+    "google-translate-open-api": "^1.3.5",
+    "moment-timezone": "^0.5.31",
+    "node-fetch": "^2.6.1",
+    "remove.bg": "^1.3.0",
+    "sharp": "^0.26.1",
+    "tiktok-scraper": "^1.3.3",
+    "video-url-link": "git+https://github.com/YogaSakti/video-url-link.git"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.9.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
   }
 }
