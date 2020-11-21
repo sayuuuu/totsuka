@@ -14,7 +14,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "jikan-node": "xy137/jikan-node#master",
-    "@open-wa/wa-automate": "^3.0.6",
+    "@open-wa/wa-automate": "^3.1.0",
     "akaneko": "^3.0.2",
     "anime-scraper": "^3.1.1",
     "fbvideos": "^1.0.2",
